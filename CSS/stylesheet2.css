@@ -1,3 +1,6 @@
+/* ---------------------------
+   Fonts
+   --------------------------- */
 @font-face {
     font-family: 'Polymath';
     src: url('PolymathDemo-Super.woff') format('woff');
@@ -10,15 +13,24 @@
     font-weight: normal;
 }
 
+/* ---------------------------
+   Base
+   --------------------------- */
 body {
     font-family: 'Polymath', sans-serif;
     background-color: #fff;
     color: #111;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: 120px;
+    /* Space for fixed footer */
 }
 
-/* Navigation */
+/* ---------------------------
+   Navigation
+   --------------------------- */
 nav {
     display: flex;
     justify-content: space-between;
@@ -26,6 +38,9 @@ nav {
     background-color: #b09393;
     color: #fff;
     padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 .nav-brand {
@@ -38,6 +53,8 @@ nav ul {
     display: flex;
     gap: 20px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
@@ -51,7 +68,9 @@ nav a:hover {
     color: #ffb6c1;
 }
 
-/* Intro Section */
+/* ---------------------------
+   Intro Section
+   --------------------------- */
 .intro-flex {
     display: flex;
     flex-wrap: wrap;
@@ -84,7 +103,9 @@ nav a:hover {
     color: #111;
 }
 
-/* Section Titles */
+/* ---------------------------
+   Section Titles
+   --------------------------- */
 .section-title {
     text-align: center;
     font-size: 2rem;
@@ -92,34 +113,42 @@ nav a:hover {
     color: #111;
 }
 
-/* images Layout */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
+/* ---------------------------
+   MASONRY GALLERY
+   --------------------------- */
+.gallery.masonry {
+    column-width: 320px;
+    column-gap: 24px;
     padding: 0 40px 60px;
 }
 
-.gallery a {
-    display: block;
-    max-width: 100%;
+.gallery.masonry a {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 24px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
 }
 
-.gallery img {
-    max-width: 100%;
+.gallery.masonry img {
+    width: 100%;
     height: auto;
+    display: block;
     border-radius: 8px;
     object-fit: cover;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery img:hover {
+.gallery.masonry img:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+    box-shadow: 0 0 15px rgba(255, 182, 193, 0.85);
 }
 
-/* Contact Section */
+/* ---------------------------
+   Contact Section
+   --------------------------- */
 .contact {
     text-align: center;
     padding: 40px 20px;
@@ -139,16 +168,46 @@ nav a:hover {
     text-decoration: none;
 }
 
-/* Footer */
+.contact-image {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.contact-image img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------
+   Footer 
+   --------------------------- */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
     padding: 20px;
     font-size: 0.9rem;
     color: #666;
+    background-color: #fafafa;
     border-top: 1px solid #eee;
+    box-sizing: border-box;
+    z-index: 50;
 }
 
-/* Responsive flexbox */
+/* ---------------------------
+   Responsive
+   --------------------------- */
+@media (max-width: 1100px) {
+    .gallery.masonry {
+        column-width: 280px;
+        padding: 0 30px 40px;
+    }
+}
+
 @media (max-width: 768px) {
     .intro-flex {
         flex-direction: column;
@@ -168,8 +227,136 @@ footer {
         text-align: left;
     }
 
-    .gallery {
-        grid-template-columns: 1fr;
+    .gallery.masonry {
+        column-width: 220px;
+        column-gap: 18px;
         padding: 0 20px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery.masonry {
+        column-width: 100%;
+        column-gap: 12px;
+        padding: 0 16px 30px;
+    }
+
+    nav {
+        padding: 14px 16px;
+    }
+
+    .nav-brand {
+        font-size: 1.25rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+        padding: 16px 10px;
+    }
+
+    .contact-image img {
+        max-width: 90%;
+    }
+}
+
+/* ---------------------------
+   Home Hero Section
+   --------------------------- */
+.home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 80px 8vw;
+    background-color: #ffffff;
+}
+
+.hero-image-wrapper {
+    max-width: 420px;
+    flex-shrink: 0;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-text h1 {
+    font-size: 3.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #222;
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .home-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 5vw;
+    }
+
+    .hero-text h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .hero-image-wrapper {
+        max-width: 80%;
+    }
+}
+
+/* ---------------------------
+   Beetle Strip Image Section
+   --------------------------- */
+.beetle-strip {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 40px 0;
+    padding: 0 40px;
+    /* Match nav/footer horizontal padding */
+    box-sizing: border-box;
+}
+
+.beetle-strip img {
+    width: 100%;
+    max-width: 1800px;
+    /* Limit width */
+    height: auto;
+}
+
+/* Responsive */
+@media (max-width: 5000px) {
+    .beetle-strip {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .beetle-strip {
+        padding: 0 16px;
+    }
+
+    .beetle-strip img {
+        max-width: 100%;
     }
 }
